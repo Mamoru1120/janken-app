@@ -1,0 +1,377 @@
+
+body{
+    width: 1700px;
+    margin:0;
+    padding:0;
+    text-align:left;
+    font-size: 32px;
+}
+header{
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    height: 100px;
+}
+
+main{
+    position: relative;
+}
+
+#result_img{
+    position: absolute;
+    object-fit: contain;
+}
+
+#win, #lose, #draw{
+    position: absolute;
+    width: 1700px;
+    z-index: 5;
+}
+
+/* sec1 */
+#operation{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#language{
+    width: 250px;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    left: 40px;
+    top: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#japanese, #english{
+    font-size: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #FFF;
+    background-color: crimson;
+    border-radius: 50%;
+
+}
+
+#reset{
+    font-size: 20px;
+    margin-right: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #FFF;
+    background-color: #666;
+    border-radius: 50%;
+}
+
+#rule{
+    padding: 15px;
+    background-color: darkgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+#rule_title{
+    font-size: 32px;
+    font-weight: 300;
+    color: #FFF;
+    margin: 0;
+}
+
+#rule_honbun1, #rule_honbun2{
+    font-size: 20px;
+    font-weight: 100;
+    color: #FFF;
+    margin: 0;
+}
+
+/* sec2 */
+#sec2{
+    width: 1700px;
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+#sec2_left{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#player_select {
+    display: flex;
+    justify-content: center;
+  }
+  
+#player_img_container{
+    /* 下の.player_imgも同じサイズにしてください。 */
+    width: 350px;
+    height: 650px;
+    overflow: hidden;
+    position: relative;
+    padding: 0;
+    list-style: none;
+  }
+  
+.img_select {
+    display: none;
+}
+
+.player_img{
+    /* 上の.player_img_containerも同じサイズにしてください。 */
+    width: 350px;
+    height: 650px;
+    position: absolute;
+    opacity: 0;
+}
+/* ボタン */
+.scroll_button {
+    position: absolute;
+    display: block;
+    height: 30px;
+    width: 30px;
+    /* 縦中央から20px上の位置 */
+    top: 50%;
+    margin-top: -20px;
+    /* 上辺と右辺のみ幅5pxの枠線 */
+    border-width: 5px 5px 0 0;
+    border-style: solid;
+    border-color: #000000;
+    cursor: pointer;
+    /* 普段はボタンはやや薄くする */
+    opacity: 0.5;
+    /* スライドよりも前面にする */
+    z-index: 3;
+}
+/* ホバー時にボタンを強調 */
+.scroll_button:hover {
+    opacity: 1;
+}
+/* 前へボタン */
+.scroll_prev {
+    left: 15px;
+    /* 上辺と右辺の枠線を回転して"＜"にする */
+    transform: rotate(-135deg);
+}
+/* 次へボタン */
+.scroll_next {
+    right: 15px;
+    /* 上辺と右辺の枠線を回転して"＞"にする */
+    transform: rotate(45deg);
+}
+/* スライド移動ボタンエリア */
+.move{
+    position: absolute;
+    bottom: 180px;
+    width: 100%;
+    text-align: center;
+}
+/* スライド移動の各ボタン */
+.move_button {
+    display: inline-block;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    border-radius: 100%;
+    cursor: pointer;
+    /* 普段はやや薄くする */
+    opacity: 0.5;
+    /* スライドより前面にする */
+    z-index: 2;
+}
+/* ホバー時はやや明るくする */
+.move_button:hover {
+    opacity: 0.75;
+}
+/* スライド移動ボタンの色 */
+.move_button {
+    background-color: #000000;
+}
+/* 1番目のスライド選択時 */
+/* 1番目のスライドの透明度を0にして表示する */
+.img_select:nth-of-type(1):checked ~ .player_img:nth-of-type(1) {
+    opacity: 1;
+}
+/* スライド移動ボタンの1個目を明るくする */
+/* （今選択されていることが分かるように） */
+.img_select:nth-of-type(1):checked ~ .move .move_button:nth-of-type(1) {
+    opacity: 1;
+}
+.img_select:nth-of-type(2):checked ~ .player_img:nth-of-type(2) {
+    opacity: 1;
+}
+/* 2番目のスライド選択時（1番目のスライドと同じことをする） */
+.img_select:nth-of-type(2):checked ~ .move .move_button:nth-of-type(2) {
+    opacity: 1;
+}
+/* 3番目のスライド選択時 */
+.img_select:nth-of-type(3):checked ~ .player_img:nth-of-type(3) {
+    opacity: 1;
+}
+.img_select:nth-of-type(3):checked ~ .move
+.button_move:nth-of-type(3) {
+    opacity: 1;
+}
+/* 4番目のスライド選択時 */
+.img_select:nth-of-type(4):checked ~ .player_img:nth-of-type(4) {
+    opacity: 1;
+}
+.img_select:nth-of-type(4):checked
+~ .move
+.move_button:nth-of-type(4) {
+    opacity: 1;
+}
+/* 5番目のスライド選択時 */
+.img_select:nth-of-type(5):checked ~ .player_img:nth-of-type(5) {
+    opacity: 1;
+}
+.img_select:nth-of-type(5):checked
+~ .move
+.move_button:nth-of-type(5) {
+    opacity: 1;
+}
+
+#player_feature_chiikawa, #player_feature_hangyodon, #player_feature_bossbaby, #player_feature_doraemon, #player_feature_daffy{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#chiikawa_img img, #hangyodon_img img, #bossbaby_img img, #doraemon_img img, #daffy_img img{ 
+    width: 350px;
+    object-fit: cover;
+} 
+
+#chiikawa_honbun, #hangyodon_honbun, #bossbaby_honbun, #doraemon_honbun, #daffy_honbun{
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: beige;
+}
+
+#chiikawa_honbun p, #hangyodon_honbun p, #bossbaby_honbun p, #doraemon_honbun p, #daffy_honbun p{
+    margin: 0;
+    font-weight: 600;
+}
+
+#chiikawa_honbun li, #hangyodon_honbun li, #bossbaby_honbun li, #doraemon_honbun li, #daffy_honbun li{
+    margin-top: 0;
+    font-size: 20px;
+}
+
+#decision_button{
+    width: 350px;
+    height: 60px;
+    background-color: rgb(156, 16, 16);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#decision_button p{
+    font-weight: 600;
+    color: #FFF;
+}
+
+#sec2_right{
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content:start;
+    align-items: center;
+    opacity: 0;
+}
+
+#declare{
+    width: 600px;
+    background-color: beige;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+#declare_title{
+    width: 600px;
+    background-color: black;
+    color: #FFF;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+#declare_title p{
+    margin: 10px;
+    font-weight: 600;
+}
+
+#declare_honbun{
+    font-size: 20px;
+}
+
+#pc_hands_img {
+    position:relative;
+    top: 100px;
+    display: flex;
+    justify-content: center;
+}
+#pc_hands_img img {
+    position: absolute;
+}
+
+#selection_player_hands{
+    border-top: 1px solid #000000;
+}
+
+#selection_question{
+    background-color: #666;
+    padding-left: 20px;
+}
+
+#selection_question p{
+    margin: 0;
+    font-weight: 600;
+    color: #FFF;
+}
+
+#selection_player_hands ul{
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+    border-top: 1px solid #000000;
+    display:table;  /* 定義 */
+    table-layout: fixed;
+    width:100%;
+}
+#selection_player_hands li{
+    text-align: center;
+    list-style-type:none;
+    border: 1px solid #666;
+    background-color: #FFF;
+    display:table-cell;  /* 定義 */
+    cursor: pointer;
+}
+#selection_player_hands li:hover{
+    background: #0066CC;
+    color:#fff;
+}
+
+footer{
+    background-color: #fff;
+    border-bottom:1px solid #ccc;
+    text-align: center;
+}
+

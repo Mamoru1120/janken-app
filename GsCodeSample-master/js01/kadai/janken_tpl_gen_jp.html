@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>じゃんけん</title>
+</head>
+<body>
+
+<header>
+  <h1>心理じゃんけん</h1>
+</header>
+
+<main>
+
+  <!-- 結果画像 -->
+  <div id="result_img">
+    <img id="win" src="./img/Win.jpeg" alt="">
+    <img id="lose" src="./img/Lose.jpeg" alt="">
+    <img id="draw" src="./img/Draw.jpeg" alt="">
+  </div>
+  
+  <div id="sec1">
+    <!-- 言語設定、記録リセット -->
+    <div id="operation">
+  
+      <div id="language">
+        <div id="japanese">日本語</div>
+        <div id="english">English</div>
+      </div>
+  
+      <div id="reset">リセット</div>
+  
+    </div>
+  
+    <!-- ルール表示 -->
+    <div id="rule">
+      <p id="rule_title">手順</p>
+      <p id="rule_honbun1">①対戦相手を選択して、決定ボタンを押下</p>
+      <p id="rule_honbun2">②相手の出し手の宣言を見て、自分が出す手のボタンを押下</p>
+    </div>
+  </div>
+  
+  <div id="sec2">
+  
+    <div id="sec2_left">
+      <div id="player_select">
+        <div id="player_img_container">
+          <div class="player_img_list">
+            <!-- 画像選択のボタンリスト -->
+            <input class="img_select" type="radio" id="player_imgA" name="img_check" value="1" checked />
+            <input class="img_select" type="radio" id="player_imgB" name="img_check" value="2"/>
+            <input class="img_select" type="radio" id="player_imgC" name="img_check" value="3"/>
+            <input class="img_select" type="radio" id="player_imgD" name="img_check" value="4"/>
+            <input class="img_select" type="radio" id="player_imgE" name="img_check" value="5"/>
+            
+            <!-- プレイヤー1 -->
+            <div class="player_img">
+              <div class="scroll_controler">
+                <label class="scroll_button scroll_prev" for="player_imgE"></label>
+                <label class="scroll_button scroll_next" for="player_imgB"></label>
+              </div>
+  
+              <div id="player_feature_chiikawa">
+                <div id="chiikawa_img">
+                  <img src="./img/ちいかわ.jpg">
+                </div>
+                
+                <div id="chiikawa_honbun">
+                  <p id="player_name1">ハチワレ</p>
+                  <ul>
+                    <li id="playerA_thebest">一番確率が高い出し手：グー</li>
+                    <li id="playerA_lie">嘘をつく確率：60％</li>
+                    <li id="playerA_result">対戦歴：0勝0敗</li>
+                  </ul>
+                </div> 
+              </div>
+              
+            </div>
+              <!-- プレイヤー2 -->
+            <div class="player_img">
+              <div class="controler_scroll">
+                <label class="scroll_button scroll_prev" for="player_imgA"></label>
+                <label class="scroll_button scroll_next" for="player_imgC"></label>
+              </div>
+  
+              <div id="player_feature_hangyodon">
+                <div id="hangyodon_img">
+                  <img src="./img/ハンギョドン.png">
+                </div>
+                
+                <div id="hangyodon_honbun">
+                  <p id="player_name2">ハンギョドン</p>
+  
+                  <ul>
+                    <li id="playerB_thebest">一番確率が高い出し手：パー</li>
+                    <li id="playerB_lie">嘘をつく確率：40％</li>
+                    <li id="playerB_result">対戦歴：0勝0敗</li>
+                  </ul>
+                </div> 
+              </div>
+            </div>
+            <!-- プレイヤー3 -->
+            <div class="player_img">
+              <div class="controler_scroll">
+                <label class="scroll_button scroll_prev" for="player_imgB"></label>
+                <label class="scroll_button scroll_next" for="player_imgD"></label>
+              </div>
+  
+              <div id="player_feature_bossbaby">
+                <div id="bossbaby_img">
+                  <img src="./img/ボスベイビー.jpg">
+                </div>
+                
+                <div id="bossbaby_honbun">
+                  <p id="player_name3">ボスベイビー</p>
+  
+                  <ul>
+                    <li id="playerC_thebest">一番確率が高い出し手：チョキ</li>
+                    <li id="playerC_lie">嘘をつく確率：80％</li>
+                    <li id="playerC_result">対戦歴：0勝0敗</li>
+                  </ul>
+                </div> 
+              </div>
+            </div>
+            <!-- プレイヤー4 -->
+            <div class="player_img">
+              <div class="controler_scroll">
+                <label class="scroll_button scroll_prev" for="player_imgC"></label>
+                <label class="scroll_button scroll_next" for="player_imgE"></label>
+              </div>
+  
+              <div id="player_feature_doraemon">
+                <div id="doraemon_img">
+                  <img src="./img/どらえもん.jpg">
+                </div>
+                
+                <div id="doraemon_honbun">
+                  <p id="player_name4">ドラえもん</p>
+  
+                  <ul>
+                    <li id="playerD_thebest">一番確率が高い出し手：グー</li>
+                    <li id="playerD_lie">嘘をつく確率：20％</li>
+                    <li id="playerD_result">対戦歴：0勝0敗</li>
+                  </ul>
+                </div> 
+              </div>
+            </div>
+            <!-- プレイヤー5 -->
+            <div class="player_img">
+              <div class="controler_scroll">
+                <label class="scroll_button scroll_prev" for="player_imgD"></label>
+                <label class="scroll_button scroll_next" for="player_imgA"></label>
+              </div>
+  
+              <div id="player_feature_daffy">
+                <div id="daffy_img">
+                  <img src="./img/ダッフィー.jpg">
+                </div>
+                
+                <div id="daffy_honbun">
+                  <p id="player_name5">ダッフィー</p>
+  
+                  <ul>
+                    <li id="playerE_thebest">一番確率が高い出し手：パー</li>
+                    <li id="playerE_lie">嘘をつく確率：0％</li>
+                    <li id="playerE_result">対戦歴：0勝0敗</li>
+                  </ul>
+                </div> 
+              </div>
+            </div>
+  
+            <!-- 移動用ボタン -->
+            <div class="move">
+              <label class="move_button" for="player_imgA"></label>
+              <label class="move_button" for="player_imgB"></label>
+              <label class="move_button" for="player_imgC"></label>
+              <label class="move_button" for="player_imgD"></label>
+              <label class="move_button" for="player_imgE"></label>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div id="decision_button">
+        <p id="decision">決定</p>
+      </div>
+    </div>
+  
+    <div id="sec2_right">
+      <div id="declare">
+        <div id="declare_title">
+          <p>宣言</p>
+        </div>
+        
+        <p id="declare_honbun"></p>
+      </div>
+  
+      <div id="voice">
+        <p>じゃんけん・・・</p>
+      </div>
+  
+      <!-- ランダム表示用 -->
+      <div id="pc_hands_img">
+        <img id="gu" src="./img/グー.jpg" alt="">
+        <img id="cho" src="./img/チョキ.jpg" alt="">
+        <img id="par" src="./img/パー.jpg" alt="">
+      </div>
+    </div>
+  </div>
+    
+    
+  <div id="selection_player_hands">
+    <div id="selection_question">
+      <p id="selection">あなたは何を出す？</p>
+    </div>
+    
+    <ul>
+      <li id="gu_btn"><img src="./img/グー.jpg" alt=""></li>
+      <li id="cho_btn"><img src="./img/チョキ.jpg" alt=""></li>
+      <li id="par_btn"><img src="./img/パー.jpg" alt=""></li>
+    </ul>
+  </div>
+</main>
+
+<footer></footer>
+<script>
+//じゃんけん用のSCRIPTを書いてください
+  
+  //勝ち負けの画像を非表示
+  $("#win").hide();
+  $("#lose").hide();
+  $("#draw").hide();
+
+  //変数定義（グローバル変数は関数の外で定義）
+  let r = "";//ランダム関数で使用（出し手用）
+  let n = "";//出し手の繰り上げで使用
+  let result = "";//結果判定用
+  let player_hands = "";//プレイヤーの出し手で使用
+  let CPU_hands = "";//CPUの出し手で使用
+  let computer = "";//CPUの番号
+  let r2 = "";//ランダム関数で使用（真偽用）
+  let n2 = "";//真偽の繰り上げで使用
+  let setIntervalID = "";//画像繰り返しを停止するためのID
+  let count1_win = 0;//CPU1の勝ち用
+  let count1_lose = 0;//CPU1の負け用
+  let count2_win = 0;//CPU2の勝ち用
+  let count2_lose = 0;//CPU2の負け用
+  let count3_win = 0;//CPU3の勝ち用
+  let count3_lose = 0;//CPU3の負け用
+  let count4_win = 0;//CPU4の勝ち用
+  let count4_lose = 0;//CPU4の負け用
+  let count5_win = 0;//CPU5の勝ち用
+  let count5_lose = 0;//CPU5の負け用
+
+  $("#japanese").on("click", function(){
+    $(h1).html("心理じゃんけん");
+    $("#reset").html("リセット");
+    $("#rule_title").html("手順");
+    $("#rule_honbun1").html("①対戦相手を選択して、決定ボタンを押下");
+    $("#rule_honbun2").html("②相手の出し手の宣言を見て、自分が出す手のボタンを押下");
+    $("#player_name1").html("ハチワレ");
+    $("#player_name2").html("ハンギョドン");
+    $("#player_name3").html("ボスベイビー");
+    $("#player_name4").html("ドラえもん");
+    $("#player_name5").html("ダッフィー");
+    $("#playerA_thebest").html("一番確率が高い出し手：グー");
+    $("#playerB_thebest").html("一番確率が高い出し手：パー");
+    $("#playerC_thebest").html("一番確率が高い出し手：チョキ");
+    $("#playerD_thebest").html("一番確率が高い出し手：グー");
+    $("#playerE_thebest").html("一番確率が高い出し手：パー");
+    $("#playerA_lie").html("嘘をつく確率: 60％");
+    $("#playerB_lie").html("嘘をつく確率: 40％");
+    $("#playerC_lie").html("嘘をつく確率: 80％");
+    $("#playerD_lie").html("嘘をつく確率: 20％");
+    $("#playerE_lie").html("嘘をつく確率: 0％");
+    $("#playerA_result").html("対戦歴: 0勝0敗");
+    $("#playerB_result").html("対戦歴: 0勝0敗");
+    $("#playerC_result").html("対戦歴: 0勝0敗");
+    $("#playerD_result").html("対戦歴: 0勝0敗");
+    $("#playerE_result").html("対戦歴: 0勝0敗");
+    $("#decision").html("決定");
+    $("#selection").html("あなたは何を出す？");
+  });
+  $("#english").on("click", function(){
+    $(h1).html("Psychological rock, paper, scissors");
+    $("#reset").html("Reset");
+    $("#rule_title").html("Manual");
+    $("#rule_honbun1").html("①Select player, push decision button");
+    $("#rule_honbun2").html("②Push your hand after readin player's declaration");
+    $("#player_name1").html("Hachiware");
+    $("#player_name2").html("Hangyodon");
+    $("#player_name3").html("Boss baby");
+    $("#player_name4").html("Doraemon");
+    $("#player_name5").html("Daffy");
+    $("#playerA_thebest").html("The highest possibility: rock");
+    $("#playerB_thebest").html("The highest possibility: paper");
+    $("#playerC_thebest").html("The highest possibility: scissors");
+    $("#playerD_thebest").html("The highest possibility: rock");
+    $("#playerE_thebest").html("The highest possibility: paper");
+    $("#playerA_lie").html("Probability of lying: 60 parcent");
+    $("#playerB_lie").html("Probability of lying: 40 parcent");
+    $("#playerC_lie").html("Probability of lying: 80 parcent");
+    $("#playerD_lie").html("Probability of lying: 20 parcent");
+    $("#playerE_lie").html("Probability of lying: 0 parcent");
+    $("#playerA_result").html("Match history: 0 wins 0 loses");
+    $("#playerB_result").html("Match history: 0 wins 0 loses");
+    $("#playerC_result").html("Match history: 0 wins 0 loses");
+    $("#playerD_result").html("Match history: 0 wins 0 loses");
+    $("#playerE_result").html("Match history: 0 wins 0 loses");
+    $("#decision").html("Decision");
+    $("#selection").html("What do you select?");
+  });
+
+  // 勝敗履歴のリセット
+  $("#reset").off("click");
+  $("#reset").on("click", function(){
+    count1_win = 0;
+    count1_lose = 0;
+    count2_win = 0;
+    count2_lose = 0;
+    count3_win = 0;
+    count3_lose = 0;
+    count4_win = 0;
+    count4_lose = 0;
+    count5_win = 0;
+    count5_lose = 0;
+  });
+
+  // CPUの決定 + 右画面の出現
+  $("#decision_button").off("click");
+  $("#decision_button").on("click", function(){
+    $("#gu").show();
+    $("#cho").show();
+    $("#par").show();
+    computer = $("input[name='img_check']:checked").val();//選択されているラジオボタンのValueを取得
+    $("#sec2_right").css("opacity","1");
+
+    // CPUの出し手の繰り返しを表示 + ボタンをクリックしたらCPUの出し手が表示され、勝敗が判定される
+    $(function(){
+      $("#pc_hands_img img:not(:first-child)").hide();
+      setIntervalID = setInterval(function() {
+        $("#pc_hands_img img:first-child").fadeOut(50).next("img").fadeIn(50).end().appendTo("#pc_hands_img");
+      },200);
+      
+      // CPUの出し手の計算
+      r = Math.random()*10; //小数点0.000001～0.999999
+      n = Math.ceil(r); //繰り上げ
+
+      // CPUの真偽の計算
+      r2 = Math.random()*5; //小数点0.000001～0.999999
+      n2 = Math.ceil(r2); //繰り上げ
+      
+      if(computer == 1){
+        // 真偽の出力
+        if(n2 == 1||n2 == 2){//真
+          if(n == 1||n == 2 || n == 3|| n == 4){
+           $("#declare_honbun").html("グーだすよ！");
+          }
+          if(n == 5||n == 6||n ==7){
+            $("#declare_honbun").html("チョキだすよ！");
+          }
+          if(n == 8||n == 9||n == 10){
+            $("#declare_honbun").html("パーだすよ！");
+          }
+        }
+        if(n2 == 3||n2 == 4||n2 == 5){//偽
+          if(n == 1||n == 2 || n == 3|| n == 4){
+            $("#declare_honbun").html("パーだすよ！");
+          }
+          if(n == 5||n == 6||n ==7){
+            $("#declare_honbun").html("グーだすよ！");
+          }
+          if(n == 8||n == 9||n == 10){
+            $("#declare_honbun").html("チョキだすよ！");
+          }
+        }
+
+        // ボタンを押したときの動作
+         $("#gu_btn").off("click");
+        $("#gu_btn").on("click", function(){
+          player_hands = 1;
+          // 出した手の画像を表示
+          clearInterval(setIntervalID);
+          if(n == 1||n == 2 || n == 3|| n == 4){
+            $("#gu").show();
+            $("#cho").hide();
+            $("#par").hide();
+            CPU_hands = 1;
+          }
+          if(n == 5||n == 6||n ==7){
+            $("#gu").hide();
+            $("#cho").show();
+            $("#par").hide();
+            CPU_hands = 2;
+          }
+          if(n == 8||n == 9||n == 10){
+            $("#gu").hide();
+            $("#cho").hide();
+            $("#par").show();
+            CPU_hands = 3;
+          }
+
+          // 勝ち負けの判断
+          result = player_hands - CPU_hands;
+          if(result == 0){
+            $("#draw").show();
+            setTimeout(function(){
+              $("#draw").hide();
+            },2000);
+          }
+          if(result == -1 || result == 2){
+            $("#win").show();
+            setTimeout(function(){
+              $("#win").hide();
+            },2000);
+            count1_win++;
+          }
+          if(result == 1 || result == -2){
+            $("#lose").show();
+            setTimeout(function(){
+              $("#lose").hide();
+            },2000);
+            count1_lose++
+          }
+          
+        });  
+        $("#cho_btn").off("click");
+        $("#cho_btn").on("click", function(){
+          player_hands = 2;
+          // 出した手の画像を表示
+          clearInterval(setIntervalID);
+          if(n == 1||n == 2 || n == 3|| n == 4){
+            $("#gu").show();
+            $("#cho").hide();
+            $("#par").hide();
+            CPU_hands = 1;
+          }
+          if(n == 5||n == 6||n ==7){
+            $("#gu").hide();
+            $("#cho").show();
+            $("#par").hide();
+            CPU_hands = 2;
+          }
+          if(n == 8||n == 9||n == 10){
+            $("#gu").hide();
+            $("#cho").hide();
+            $("#par").show();
+            CPU_hands = 3;
+          }
+
+          // 勝ち負けの判断
+          result = player_hands - CPU_hands;
+          if(result == 0){
+            $("#draw").show();
+            setTimeout(function(){
+              $("#draw").hide();
+            },2000);
+          }
+          if(result == -1 || result == 2){
+            $("#win").show();
+            setTimeout(function(){
+              $("#win").hide();
+            },2000);
+            count1_win++;
+          }
+          if(result == 1 || result == -2){
+            $("#lose").show();
+            setTimeout(function(){
+              $("#lose").hide();
+            },2000);
+            count1_lose;
+          }
+          
+        });  
+        $("#par_btn").off("click");
+        $("#par_btn").on("click", function(){
+          player_hands = 3;
+        
+          // 出した手の画像を表示
+          clearInterval(setIntervalID);
+          if(n == 1||n == 2||n == 3||n == 4){
+            $("#gu").show();
+            $("#cho").hide();
+            $("#par").hide();
+            CPU_hands = 1;
+          }
+          if(n == 5||n == 6||n == 7){
+            $("#gu").hide();
+            $("#cho").show();
+            $("#par").hide();
+            CPU_hands = 2;
+          }
+          if(n == 8||n == 9||n == 10){
+            $("#gu").hide();
+            $("#cho").hide();
+            $("#par").show();
+            CPU_hands = 3;
+          }
+
+          // 勝ち負けの判断
+          result = player_hands - CPU_hands;
+          if(result == 0){
+            $("#draw").show();
+            setTimeout(function(){
+              $("#draw").hide();
+            },2000);
+          }
+          if(result == -1 || result == 2){
+            $("#win").show();
+            setTimeout(function(){
+              $("#win").hide();
+            },2000);
+            count1_win++;
+          }
+          if(result == 1 || result == -2){
+            $("#lose").show();
+            setTimeout(function(){
+              $("#lose").hide();
+            },2000);
+            count1_lose++;
+          }
+        
+        });
+      }
+      if(computer == 2){
+
+        // 真偽の出力
+        if(n2 == 1||n2 == 2||n2 == 3){//真
+          if(n == 1||n == 2 || n == 3){
+           $("#declare_honbun").html("グーだすよ！");
+          }
+          if(n == 4||n == 5){
+            $("#declare_honbun").html("チョキだすよ！");
+          }
+          if(n == 6||n == 7|| n == 8||n == 9||n == 10){
+            $("#declare_honbun").html("パーだすよ！");
+          }
+        }
+        if(n2 == 4||n2 == 5){//偽
+          if(n == 1||n == 2 || n == 3){
+            $("#declare_honbun").html("パーだすよ！");
+          }
+          if(n == 4||n == 5){
+            $("#declare_honbun").html("グーだすよ！");
+          }
+          if(n == 6||n == 7|| n == 8||n == 9||n == 10){
+            $("#declare_honbun").html("チョキだすよ！");
+          }
+        }
+
+        // ボタンを押したときの動作
+        $("#gu_btn").off("click");
+        $("#gu_btn").on("click", function(){
+          player_hands = 1;
+          // 出した手の画像を表示
+          clearInterval(setIntervalID);
+          if(n == 1||n == 2 || n == 3){
+            $("#gu").show();
+            $("#cho").hide();
+            $("#par").hide();
+            CPU_hands = 1;
+          }
+          if(n == 4||n == 5){
+            $("#gu").hide();
+            $("#cho").show();
+            $("#par").hide();
+            CPU_hands = 2;
+          }
+          if(n == 6||n == 7|| n == 8||n == 9||n == 10){
+            $("#gu").hide();
+            $("#cho").hide();
+            $("#par").show();
+            CPU_hands = 3;
+          }
+          // 勝ち負けの判断
+          result = player_hands - CPU_hands;
+          if(result == 0){
+            $("#draw").show();
+            setTimeout(function(){
+              $("#draw").hide();
+            },2000);
+          }
+          if(result == -1 || result == 2){
+            $("#win").show();
+            setTimeout(function(){
+              $("#win").hide();
+            },2000);
+            count2_win++;
+          }
+          if(result == 1 || result == -2){
+            $("#lose").show();
+            setTimeout(function(){
+              $("#lose").hide();
+            },2000);
+            count2_lose++;
+          }
+          
+        });  
+        $("#cho_btn").off("click");
+        $("#cho_btn").on("click", function(){
+          player_hands = 2;
+          // 出した手の画像を表示
+          clearInterval(setIntervalID);
+          if(n == 1||n == 2 || n == 3){
+            $("#gu").show();
+            $("#cho").hide();
+            $("#par").hide();
+            CPU_hands = 1;
+          }
+          if(n == 4||n == 5){
+            $("#gu").hide();
+            $("#cho").show();
+            $("#par").hide();
+            CPU_hands = 2;
+          }
+          if(n == 6||n == 7|| n == 8||n == 9||n == 10){
+            $("#gu").hide();
+            $("#cho").hide();
+            $("#par").show();
+            CPU_hands = 3;
+          }
+
+          // 勝ち負けの判断
+          result = player_hands - CPU_hands;
+          if(result == 0){
+            $("#draw").show();
+            setTimeout(function(){
+              $("#draw").hide();
+            },2000);
+          }
+          if(result == -1 || result == 2){
+            $("#win").show();
+            setTimeout(function(){
+              $("#win").hide();
+            },2000);
+            count2_win++;
+          }
+          if(result == 1 || result == -2){
+            $("#lose").show();
+            setTimeout(function(){
+              $("#lose").hide();
+            },2000);
+            count2_lose++;
+          }
+          
+        });  
+        $("#par_btn").off("click");
+        $("#par_btn").on("click", function(){
+          player_hands = 3;
+        
+          // 出した手の画像を表示
+          clearInterval(setIntervalID);
+          if(n == 1||n == 2 || n == 3){
+            $("#gu").show();
+            $("#cho").hide();
+            $("#par").hide();
+            CPU_hands = 1;
+          }
+          if(n == 4||n == 5){
+            $("#gu").hide();
+            $("#cho").show();
+            $("#par").hide();
+            CPU_hands = 2;
+          }
+          if(n == 6||n == 7|| n == 8||n == 9||n == 10){
+            $("#gu").hide();
+            $("#cho").hide();
+            $("#par").show();
+            CPU_hands = 3;
+          }
+
+          // 勝ち負けの判断
+          result = player_hands - CPU_hands;
+          if(result == 0){
+            $("#draw").show();
+            setTimeout(function(){
+              $("#draw").hide();
+            },2000);
+          }
+          if(result == -1 || result == 2){
+            $("#win").show();
+            setTimeout(function(){
+              $("#win").hide();
+            },2000);
+            count2_win++;
+          }
+          if(result == 1 || result == -2){
+            $("#lose").show();
+            setTimeout(function(){
+              $("#lose").hide();
+            },2000);
+            count2_lose++;
+          }
+        
+        });
+      }
+      if(computer == 3){
+       
+         // 真偽の出力
+         if(n2 == 1){//真
+          if(n == 1||n == 2 || n == 3){
+           $("#declare_honbun").html("グーだすよ！");
+          }
+          if(n == 4||n == 5||n == 6||n == 7){
+            $("#declare_honbun").html("チョキだすよ！");
+          }
+          if(n == 8||n == 9||n == 10){
+            $("#declare_honbun").html("パーだすよ！");
+          }
+        }
+        if(n2 == 2|| n2 == 3||n2 == 4||n2 == 5){//偽
+          if(n == 1||n == 2 || n == 3){
+            $("#declare_honbun").html("パーだすよ！");
+          }
+          if(n == 4||n == 5||n == 6||n == 7){
+            $("#declare_honbun").html("グーだすよ！");
+          }
+          if(n == 8||n == 9||n == 10){
+            $("#declare_honbun").html("チョキだすよ！");
+          }
+        }
+       
+        // ボタンを押したときの動作
+        $("#gu_btn").off("click");
+        $("#gu_btn").on("click", function(){
+          player_hands = 1;
+          // 出した手の画像を表示
+          clearInterval(setIntervalID);
+          if(n == 1||n == 2 || n == 3){
+            $("#gu").show();
+            $("#cho").hide();
+            $("#par").hide();
+            CPU_hands = 1;
+          }
+          if(n == 4||n == 5||n == 6||n == 7){
+            $("#gu").hide();
+            $("#cho").show();
+            $("#par").hide();
+            CPU_hands = 2;
+          }
+          if(n == 8||n == 9||n == 10){
+            $("#gu").hide();
+            $("#cho").hide();
+            $("#par").show();
+            CPU_hands = 3;
+          }
+          // 勝ち負けの判断
+          result = player_hands - CPU_hands;
+          if(result == 0){
+            $("#draw").show();
+            setTimeout(function(){
+              $("#draw").hide();
+            },2000);
+          }
+          if(result == -1 || result == 2){
+            $("#win").show();
+            setTimeout(function(){
+              $("#win").hide();
+            },2000);
+            count3_win++;
+          }
+          if(result == 1 || result == -2){
+            $("#lose").show();
+            setTimeout(function(){
+              $("#lose").hide();
+            },2000);
+            count3_lose++;
+          }
+          
+        });  
+        $("#cho_btn").off("click");
+        $("#cho_btn").on("click", function(){
+          player_hands = 2;
+          // 出した手の画像を表示
+          clearInterval(setIntervalID);
+          if(n == 1||n == 2 || n == 3){
+            $("#gu").show();
+            $("#cho").hide();
+            $("#par").hide();
+            CPU_hands = 1;
+          }
+          if(n == 4||n == 5||n == 6||n == 7){
+            $("#gu").hide();
+            $("#cho").show();
+            $("#par").hide();
+            CPU_hands = 2;
+          }
+          if(n == 8||n == 9||n == 10){
+            $("#gu").hide();
+            $("#cho").hide();
+            $("#par").show();
+            CPU_hands = 3;
+          }
+
+          // 勝ち負けの判断
+          result = player_hands - CPU_hands;
+          if(result == 0){
+            $("#draw").show();
+            setTimeout(function(){
+              $("#draw").hide();
+            },2000);
+          }
+          if(result == -1 || result == 2){
+            $("#win").show();
+            setTimeout(function(){
+              $("#win").hide();
+            },2000);
+            count3_win++;
+          }
+          if(result == 1 || result == -2){
+            $("#lose").show();
+            setTimeout(function(){
+              $("#lose").hide();
+            },2000);
+            count3_lose++;
+          }
+          
+        });  
+        $("#par_btn").off("click");
+        $("#par_btn").on("click", function(){
+          player_hands = 3;
+        
+          // 出した手の画像を表示
+          clearInterval(setIntervalID);
+          if(n == 1||n == 2 || n == 3){
+            $("#gu").show();
+            $("#cho").hide();
+            $("#par").hide();
+            CPU_hands = 1;
+          }
+          if(n == 4||n == 5||n == 6||n == 7){
+            $("#gu").hide();
+            $("#cho").show();
+            $("#par").hide();
+            CPU_hands = 2;
+          }
+          if(n == 8||n == 9||n == 10){
+            $("#gu").hide();
+            $("#cho").hide();
+            $("#par").show();
+            CPU_hands = 3;
+          }
+
+          // 勝ち負けの判断
+          result = player_hands - CPU_hands;
+          if(result == 0){
+            $("#draw").show();
+            setTimeout(function(){
+              $("#draw").hide();
+            },2000);
+          }
+          if(result == -1 || result == 2){
+            $("#win").show();
+            setTimeout(function(){
+              $("#win").hide();
+            },2000);
+            count3_win++;
+          }
+          if(result == 1 || result == -2){
+            $("#lose").show();
+            setTimeout(function(){
+              $("#lose").hide();
+            },2000);
+            count3_lose++;
+          }
+        
+        });
+      }
+      if(computer == 4){
+
+        // 真偽の出力
+        if(n2 == 1|| n2 == 2||n2 == 3||n2 == 4){//真
+          if(n == 1||n == 2||n == 3||n == 4||n ==5||n == 6||n == 7||n == 8||n == 9||n == 10){
+           $("#declare_honbun").html("グーだすよ！");
+          }
+        }
+        if(n2 == 5){//偽
+          if(n == 1||n == 2||n == 3||n == 4||n ==5||n == 6||n == 7||n == 8||n == 9||n == 10){
+            $("#declare_honbun").html("パーだすよ！");
+          }
+        }
+       
+
+       // ボタンを押したときの動作
+       $("#gu_btn").off("click");
+       $("#gu_btn").on("click", function(){
+          player_hands = 1;
+          // 出した手の画像を表示
+          clearInterval(setIntervalID);
+          if(n == 1||n == 2||n == 3||n == 4||n ==5||n == 6||n == 7||n == 8||n == 9||n == 10){
+            $("#gu").show();
+            $("#cho").hide();
+            $("#par").hide();
+            CPU_hands = 1;
+          }
+          // 勝ち負けの判断
+          result = player_hands - CPU_hands;
+          if(result == 0){
+            $("#draw").show();
+            setTimeout(function(){
+              $("#draw").hide();
+            },2000);
+          }
+          if(result == -1 || result == 2){
+            $("#win").show();
+            setTimeout(function(){
+              $("#win").hide();
+            },2000);
+            count4_win++;
+          }
+          if(result == 1 || result == -2){
+            $("#lose").show();
+            setTimeout(function(){
+              $("#lose").hide();
+            },2000);
+            count4_lose++;
+          }
+          
+        });  
+        $("#cho_btn").off("click");
+        $("#cho_btn").on("click", function(){
+          player_hands = 2;
+          // 出した手の画像を表示
+          clearInterval(setIntervalID);
+          if(n == 1||n == 2||n == 3||n == 4||n ==5||n == 6||n == 7||n == 8||n == 9||n == 10){
+            $("#gu").show();
+            $("#cho").hide();
+            $("#par").hide();
+            CPU_hands = 1;
+          }
+
+          // 勝ち負けの判断
+          result = player_hands - CPU_hands;
+          if(result == 0){
+            $("#draw").show();
+            setTimeout(function(){
+              $("#draw").hide();
+            },2000);
+          }
+          if(result == -1 || result == 2){
+            $("#win").show();
+            setTimeout(function(){
+              $("#win").hide();
+            },2000);
+            count4_win++;
+          }
+          if(result == 1 || result == -2){
+            $("#lose").show();
+            setTimeout(function(){
+              $("#lose").hide();
+            },2000);
+            count4_lose++;
+          }
+          
+        });  
+        $("#par_btn").off("click");
+        $("#par_btn").on("click", function(){
+          player_hands = 3;
+        
+          // 出した手の画像を表示
+          clearInterval(setIntervalID);
+          if(n == 1||n == 2||n == 3||n == 4||n ==5||n == 6||n == 7||n == 8||n == 9||n == 10){
+            $("#gu").show();
+            $("#cho").hide();
+            $("#par").hide();
+            CPU_hands = 1;
+          }
+
+          // 勝ち負けの判断
+          result = player_hands - CPU_hands;
+          if(result == 0){
+            $("#draw").show();
+            setTimeout(function(){
+              $("#draw").hide();
+            },2000);
+          }
+          if(result == -1 || result == 2){
+            $("#win").show();
+            setTimeout(function(){
+              $("#win").hide();
+            },2000);
+            count4_win++;
+          }
+          if(result == 1 || result == -2){
+            $("#lose").show();
+            setTimeout(function(){
+              $("#lose").hide();
+            },2000);
+            count4_lose++;
+          }
+        
+        });
+      }
+      if(computer == 5){
+
+        // 真偽の出力
+        if(n2 == 1||n2 == 2|| n2 == 3||n2 == 4||n2 == 5){//真
+          if(n == 1||n == 2){
+           $("#declare_honbun").html("グーだすよ！");
+          }
+          if(n == 3||n == 4||n == 5){
+            $("#declare_honbun").html("チョキだすよ！");
+          }
+          if(n == 6||n == 7||n == 8||n == 9||n ==10){
+            $("#declare_honbun").html("パーだすよ！");
+          }
+        }
+
+        // ボタンを押したときの動作
+        $("#gu_btn").off("click");
+        $("#gu_btn").on("click", function(){
+          player_hands = 1;
+          // 出した手の画像を表示
+          clearInterval(setIntervalID);
+          if(n == 1||n == 2){
+            $("#gu").show();
+            $("#cho").hide();
+            $("#par").hide();
+            CPU_hands = 1;
+          }
+          if(n == 3||n == 4||n == 5){
+            $("#gu").hide();
+            $("#cho").show();
+            $("#par").hide();
+            CPU_hands = 2;
+          }
+          if(n == 6||n == 7||n == 8||n == 9||n ==10){
+            $("#gu").hide();
+            $("#cho").hide();
+            $("#par").show();
+            CPU_hands = 3;
+          }
+           // 勝ち負けの判断
+          result = player_hands - CPU_hands;
+          if(result == 0){
+            $("#draw").show();
+            setTimeout(function(){
+              $("#draw").hide();
+            },2000);
+          }
+          if(result == -1 || result == 2){
+            $("#win").show();
+            setTimeout(function(){
+              $("#win").hide();
+            },2000);
+            count5_win++;
+          }
+          if(result == 1 || result == -2){
+            $("#lose").show();
+            setTimeout(function(){
+              $("#lose").hide();
+            },2000);
+            count5_lose++;
+          }
+          
+        });  
+        $("#cho_btn").off("click");
+        $("#cho_btn").on("click", function(){
+          player_hands = 2;
+          // 出した手の画像を表示
+          clearInterval(setIntervalID);
+          if(n == 1||n == 2){
+            $("#gu").show();
+            $("#cho").hide();
+            $("#par").hide();
+            CPU_hands = 1;
+          }
+          if(n == 3||n == 4||n == 5){
+            $("#gu").hide();
+            $("#cho").show();
+            $("#par").hide();
+            CPU_hands = 2;
+          }
+          if(n == 6||n == 7||n == 8||n == 9||n ==10){
+            $("#gu").hide();
+            $("#cho").hide();
+            $("#par").show();
+            CPU_hands = 3;
+          }
+
+          // 勝ち負けの判断
+          result = player_hands - CPU_hands;
+          if(result == 0){
+            $("#draw").show();
+            setTimeout(function(){
+              $("#draw").hide();
+            },2000);
+          }
+          if(result == -1 || result == 2){
+            $("#win").show();
+            setTimeout(function(){
+              $("#win").hide();
+            },2000);
+            count5_win++;
+          }
+          if(result == 1 || result == -2){
+            $("#lose").show();
+            setTimeout(function(){
+              $("#lose").hide();
+            },2000);
+            count5_lose++;
+          }
+          
+        });  
+        $("#par_btn").off("click");
+        $("#par_btn").on("click", function(){
+          player_hands = 3;
+        
+          // 出した手の画像を表示
+          clearInterval(setIntervalID);
+          if(n == 1||n == 2){
+            $("#gu").show();
+            $("#cho").hide();
+            $("#par").hide();
+            CPU_hands = 1;
+          }
+          if(n == 3||n == 4||n == 5){
+            $("#gu").hide();
+            $("#cho").show();
+            $("#par").hide();
+            CPU_hands = 2;
+          }
+          if(n == 6||n == 7||n == 8||n == 9||n ==10){
+            $("#gu").hide();
+            $("#cho").hide();
+            $("#par").show();
+            CPU_hands = 3;
+          }
+
+         // 勝ち負けの判断
+         result = player_hands - CPU_hands;
+          if(result == 0){
+            $("#draw").show();
+            setTimeout(function(){
+              $("#draw").hide();
+            },2000);
+          }
+          if(result == -1 || result == 2){
+            $("#win").show();
+            setTimeout(function(){
+              $("#win").hide();
+            },2000);
+            count5_win++;
+          }
+          if(result == 1 || result == -2){
+            $("#lose").show();
+            setTimeout(function(){
+              $("#lose").hide();
+            },2000);
+            count5_lose++;
+          }
+        
+        });
+      }
+
+      $("#playerA_result").html(count1_win + "勝" + count1_lose + "敗");
+      $("#playerB_result").html(count2_win + "勝" + count2_lose + "敗");
+      $("#playerC_result").html(count3_win + "勝" + count3_lose + "敗");
+      $("#playerD_result").html(count4_win + "勝" + count4_lose + "敗");
+      $("#playerE_result").html(count5_win + "勝" + count5_lose + "敗");
+      
+    });
+  });
+
+  
+ 
+  
+</script>
+</body>
+</html>
